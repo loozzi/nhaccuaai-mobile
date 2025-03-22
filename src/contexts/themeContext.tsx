@@ -3,13 +3,13 @@ import {createContext, ReactNode, useState} from 'react';
 interface ThemeContextType {
   theme: string;
   setTheme: (theme: string) => void;
-  currentTheme: JSON;
+  currentTheme: Record<string, string>;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: 'light',
   setTheme: () => {},
-  currentTheme: JSON.parse('{}' as string) as JSON,
+  currentTheme: {},
 });
 
 interface ThemeProviderProps {
@@ -20,7 +20,7 @@ const ThemeProvider = (props: ThemeProviderProps) => {
   const {children} = props;
   const [theme, setTheme] = useState<string>('light');
 
-  const themes: Record<string, JSON> = {
+  const themes: Record<string, Record<string, string>> = {
     light: require('../themes/lightTheme').default,
   };
 

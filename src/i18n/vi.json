@@ -51,5 +51,9 @@
     "email": "Email",
     "phone": "Số điện thoại",
     "address": "Địa chỉ",
-    "birthday": "Ngày sinh"
+    "birthday": "Ngày sinh",
+    "welcome": "Chào mừng bạn đến với NhacCuaAi",
+    "welcomeSlogan": "Nghe nhạc mọi lúc, mọi nơi",
+    "forgotPassword": "Quên mật khẩu?",
+    "notMember": "Chưa là thành viên?"
 }
