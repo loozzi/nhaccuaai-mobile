@@ -1,6 +1,16 @@
 import {createContext, ReactNode, useState} from 'react';
 
-const ThemeContext = createContext({});
+interface ThemeContextType {
+  theme: string;
+  setTheme: (theme: string) => void;
+  currentTheme: JSON;
+}
+
+const ThemeContext = createContext<ThemeContextType>({
+  theme: 'light',
+  setTheme: () => {},
+  currentTheme: JSON.parse('{}' as string) as JSON,
+});
 
 interface ThemeProviderProps {
   children: ReactNode;
