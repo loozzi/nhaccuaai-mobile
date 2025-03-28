@@ -1,32 +1,23 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import routes from '../../configs/routes';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import HeaderComp from '../../components/layout/header';
+import useLanguage from '../../hook/useLanguage';
 
 export default function HomeScreen() {
   const navigation: {push: any} = useNavigation();
+  const {t} = useLanguage();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'tomato',
-      }}>
-      <Text>Details Screen</Text>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.push(routes.auth.signin);
-        }}>
-        <Text>Go to sign in</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.push(routes.auth.signup);
-        }}>
-        <Text>Go to sign up</Text>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <HeaderComp title={t.home} />
+      <Text>Home Screen</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
