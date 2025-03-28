@@ -7,7 +7,13 @@ export default function HomeScreen() {
   const navigation: {push: any} = useNavigation();
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'tomato',
+      }}>
       <Text>Details Screen</Text>
       <TouchableOpacity
         onPress={() => {

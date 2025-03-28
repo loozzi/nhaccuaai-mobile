@@ -1,3 +1,4 @@
+import TabNavigation from '../navigation/tab';
 import HomeScreen from '../screens/home';
 import SignInScreen from '../screens/signin';
 import SignUpScreen from '../screens/signup';
@@ -9,7 +10,7 @@ interface NavigationConfig {
 
 const navigationConfig: NavigationConfig[] = [
   {
-    element: HomeScreen,
+    element: TabNavigation,
     name: routes.home,
   },
   {
