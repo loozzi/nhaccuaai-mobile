@@ -1,30 +1,31 @@
-import Icon from '@react-native-vector-icons/ionicons';
 import React from 'react';
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import Icon from '@react-native-vector-icons/ionicons';
+import {useNavigation} from '@react-navigation/native';
 import ButtonComp from '../../components/common/button';
 import TextButtonComp from '../../components/common/text-button';
 import routes from '../../configs/routes';
 import useLanguage from '../../hook/useLanguage';
 import useTheme from '../../hook/useTheme';
-import {useNavigation} from '@react-navigation/native';
 
-export default function SignInScreen() {
+export default function SignUpScreen() {
   const {t} = useLanguage();
   const {currentTheme} = useTheme();
   const styles = createStyles(currentTheme);
   const navigation: any = useNavigation();
 
-  const handleSignUp = () => {
-    navigation.push(routes.auth.signup);
+  const handleSignIn = () => {
+    navigation.push(routes.auth.signin);
   };
 
-  const handleSignIn = (type: string) => {
+  const handleSignUp = (type: string) => {
     if (type === 'facebook') {
     } else if (type === 'google') {
     } else if (type === 'apple') {
@@ -32,10 +33,6 @@ export default function SignInScreen() {
       // Sign in with email and password
       navigation.push(routes.home);
     }
-  };
-
-  const handleForgotPassword = () => {
-    // navigate(routes.auth.forgotPassword);
   };
 
   return (
@@ -60,34 +57,33 @@ export default function SignInScreen() {
           secureTextEntry={true}
           autoCapitalize="none"
         />
+        <TextInput
+          style={styles.input}
+          placeholder={t.rePassword}
+          secureTextEntry={true}
+          autoCapitalize="none"
+        />
         <View style={styles.signin}>
           {/* Sign In Button */}
           <ButtonComp
-            text={t.signin}
+            text={t.signup}
             fullWidth
-            onPress={() => handleSignIn('password')}
+            onPress={() => handleSignUp('password')}
           />
-          {/* Forgot password */}
-          <TextButtonComp
-            text={t.forgotPassword}
-            onPress={handleForgotPassword}
-            style={styles.forgotPassword}
-            fontSize={14}
-            primary
-          />
-          <Text style={styles.forgotPassword}>
-            {t.or} {t.signInWith}
-          </Text>
         </View>
+
+        <Text style={styles.forgotPassword}>
+          {t.or} {t.signUpWith}
+        </Text>
         <View style={styles.loginMethodWrapper}>
           {/* TODO: Add button login by facebook, google */}
-          <TouchableOpacity onPress={() => handleSignIn('facebook')}>
+          <TouchableOpacity onPress={() => handleSignUp('facebook')}>
             <Icon name="logo-facebook" color={currentTheme.primary} size={48} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleSignIn('google')}>
+          <TouchableOpacity onPress={() => handleSignUp('google')}>
             <Icon name="logo-google" color={currentTheme.primary} size={48} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleSignIn('apple')}>
+          <TouchableOpacity onPress={() => handleSignUp('apple')}>
             <Icon name="logo-apple" color={currentTheme.primary} size={48} />
           </TouchableOpacity>
         </View>
@@ -95,8 +91,8 @@ export default function SignInScreen() {
 
       <View style={styles.signUp}>
         {/* Sign Up */}
-        <Text>{t.notMember}</Text>
-        <TextButtonComp text={t.signup} onPress={handleSignUp} primary />
+        <Text>{t.isMember}</Text>
+        <TextButtonComp text={t.signin} onPress={handleSignIn} primary />
       </View>
     </View>
   );

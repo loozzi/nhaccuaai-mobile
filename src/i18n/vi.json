@@ -48,6 +48,8 @@
     "serverError": "Lỗi máy chủ",
     "username": "Tên đăng nhập",
     "password": "Mật khẩu",
+    "rePassword": "Nhập lại mật khẩu",
+    "newPassword": "Mật khẩu mới",
     "email": "Email",
     "phone": "Số điện thoại",
     "address": "Địa chỉ",
@@ -55,5 +57,9 @@
     "welcome": "Chào mừng bạn đến với NhacCuaAi",
     "welcomeSlogan": "Nghe nhạc mọi lúc, mọi nơi",
     "forgotPassword": "Quên mật khẩu?",
-    "notMember": "Chưa là thành viên?"
+    "notMember": "Chưa là thành viên?",
+    "isMember": "Đã là thành viên?",
+    "or": "Hoặc",
+    "signInWith": "Đăng nhập với",
+    "signUpWith": "Đăng ký với"
 }

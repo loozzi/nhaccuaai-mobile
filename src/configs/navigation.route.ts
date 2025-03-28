@@ -1,22 +1,24 @@
 import HomeScreen from '../screens/home';
 import SignInScreen from '../screens/signin';
+import SignUpScreen from '../screens/signup';
 import routes from './routes';
 interface NavigationConfig {
-  name: string;
   element: any;
-  link: string;
+  name: string;
 }
 
 const navigationConfig: NavigationConfig[] = [
   {
-    name: 'Home',
     element: HomeScreen,
-    link: routes.home,
+    name: routes.home,
   },
   {
-    name: 'Sign In',
     element: SignInScreen,
-    link: routes.auth.signin,
+    name: routes.auth.signin,
+  },
+  {
+    element: SignUpScreen,
+    name: routes.auth.signup,
   },
 ];
 
