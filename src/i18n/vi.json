@@ -32,6 +32,10 @@
     "no": "Không",
     "ok": "Đồng ý",
     "search": "Tìm kiếm",
+    "searchPlaceholder": "Bạn muốn nghe gì?",
+    "recentsSearch": "Các tìm kiếm gần đây",
+    "clearSearch": "Xóa nội dung tìm kiếm gần đây",
+    "recentsSearchEmpty": "Không có tìm kiếm gần đây",
     "filter": "Lọc",
     "reset": "Đặt lại",
     "refresh": "Làm mới",
@@ -66,5 +70,8 @@
     "library": "Thư viện",
     "playlist": "Danh sách phát",
     "popular": "Phổ biến",
-    "trending": "Xu hướng"
+    "trending": "Xu hướng",
+    "song": "Bài hát",
+    "album": "Album",
+    "artist": "Nghệ sĩ"
 }
