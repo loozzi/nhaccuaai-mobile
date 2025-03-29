@@ -61,13 +61,7 @@ export default function TabNavigation() {
 const styles = StyleSheet.create({
   tabBar: {
     position: 'absolute',
-    bottom: 16,
-    marginHorizontal: 16,
-    elevation: 0,
-    backgroundColor: '#194868',
-    borderRadius: 16,
-    opacity: 0.8,
-    height: 56,
+    backgroundColor: 'rgba(0, 0, 0, 0.72)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

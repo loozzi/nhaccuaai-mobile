@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   container: {},
   title: {
     paddingHorizontal: 16,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '500',
   },
   list: {

@@ -121,14 +121,16 @@ export default function HomeScreen() {
   ]);
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <HeaderComp title={t.home} />
-      <ListHorizontalComp title={t.popular} data={popular} />
-      <ListHorizontalComp title={t.trending} data={trending} size="medium" />
-      <ListHorizontalComp title={t.trending} data={trending} size="large" />
-      <ListHorizontalComp title={t.popular} data={popular} />
-      <View style={{height: 64}}>{/* Padding bottom */}</View>
-    </ScrollView>
+      <ScrollView>
+        <ListHorizontalComp title={t.popular} data={popular} />
+        <ListHorizontalComp title={t.trending} data={trending} size="medium" />
+        <ListHorizontalComp title={t.trending} data={trending} size="large" />
+        <ListHorizontalComp title={t.popular} data={popular} />
+        <View style={{height: 64}}>{/* Padding bottom */}</View>
+      </ScrollView>
+    </View>
   );
 }
 
