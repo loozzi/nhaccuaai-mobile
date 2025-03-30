@@ -2,6 +2,10 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {PreviewCartModel} from '../../../models/preview';
 import Icon from '@react-native-vector-icons/ionicons';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../configs/navigation.route';
+import routes from '../../../configs/routes';
 
 type SizeType = 'small' | 'medium' | 'large';
 
@@ -11,15 +15,25 @@ interface ItemCartPreviewCompProps {
   size?: SizeType;
 }
 
+type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
+
 export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
   const {style, data, size} = props;
-
   const styles = createStyles(
     size === 'large' ? 200 : size === 'medium' ? 150 : 100,
   );
+  const navigation = useNavigation<NavigationProps>();
+
+  const handleGoToDetail = () => {
+    navigation.push(routes.detail, {
+      id: data.id,
+      permalink: data.permalink,
+    });
+  };
+
   return (
     <View style={style}>
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={handleGoToDetail}>
         <Image source={{uri: data.image}} style={styles.image} />
         <Icon
           style={styles.playIcon}

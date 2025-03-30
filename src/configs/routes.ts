@@ -5,6 +5,10 @@ const routes: any = {
     forgotPassword: 'FORGOT_PASSWORD',
   },
   home: 'HOME',
+  detail: 'DETAIL',
+  search: 'SEARCH',
+  library: 'LIBRARY',
+  create: 'CREATE',
 };
 
 export default routes;

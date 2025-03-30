@@ -3,10 +3,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import useLanguage from '../hook/useLanguage';
-import HomeScreen from '../screens/home';
-import SearchScreen from '../screens/search';
-import LibraryScreen from '../screens/library';
 import CreateScreen from '../screens/create';
+import HomeStack from './HomeStack';
+import LibrartStack from './LibraryStack';
+import SearchStack from './SearchStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,17 +35,17 @@ export default function TabNavigation() {
         },
       })}>
       <Tab.Screen
-        component={HomeScreen}
+        component={HomeStack}
         name={t.home}
         options={{headerShown: false}}
       />
       <Tab.Screen
-        component={SearchScreen}
+        component={SearchStack}
         name={t.search}
         options={{headerShown: false}}
       />
       <Tab.Screen
-        component={LibraryScreen}
+        component={LibrartStack}
         name={t.library}
         options={{headerShown: false}}
       />

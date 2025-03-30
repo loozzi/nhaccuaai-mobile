@@ -12,10 +12,12 @@ import {useNavigation} from '@react-navigation/native';
 import SearchComp from './search';
 import ListVerticalComp from '../../components/layout/list-vertical';
 import {PreviewCartModel} from '../../models/preview';
+import routes from '../../configs/routes';
+import {NavigationProps} from '../../models/navigation';
 
 export default function SearchScreen() {
   const {t} = useLanguage();
-  const navigation: {push: any} = useNavigation();
+  const navigation = useNavigation<NavigationProps>();
   const [search, setSearch] = useState<string>('');
   const [data, setData] = useState<PreviewCartModel[]>([
     {
@@ -179,6 +181,13 @@ export default function SearchScreen() {
     setData(newData);
   };
 
+  const handleGoToDetail = (item: PreviewCartModel) => {
+    navigation.push(routes.detail, {
+      id: item.id,
+      permalink: item.permalink,
+    });
+  };
+
   useEffect(() => {
     const bounceSearch = setTimeout(() => {
       // Handle search logic here
@@ -200,6 +209,7 @@ export default function SearchScreen() {
           size="medium"
           showRemove={true}
           onRemove={handleRemoveOne}
+          onPress={handleGoToDetail}
         />
         {data.length > 0 && (
           <TouchableOpacity

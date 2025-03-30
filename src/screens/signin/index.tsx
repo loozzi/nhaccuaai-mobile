@@ -18,10 +18,10 @@ export default function SignInScreen() {
   const {t} = useLanguage();
   const {currentTheme} = useTheme();
   const styles = createStyles(currentTheme);
-  const navigation: any = useNavigation();
+  const navigation = useNavigation();
 
   const handleSignUp = () => {
-    navigation.push(routes.auth.signup);
+    navigation.navigate(routes.auth.signup as never);
   };
 
   const handleSignIn = (type: string) => {
@@ -30,7 +30,7 @@ export default function SignInScreen() {
     } else if (type === 'apple') {
     } else {
       // Sign in with email and password
-      navigation.push(routes.home);
+      navigation.navigate(routes.home as never);
     }
   };
 

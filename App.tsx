@@ -1,16 +1,15 @@
 import React from 'react';
 import {LanguageProvider} from './src/contexts/languageContext';
 import {ThemeProvider} from './src/contexts/themeContext';
-// import {NativeRouter, Route, Routes} from 'react-router-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import navigationConfig from './src/configs/navigation.route';
+import navigationConfig, {
+  RootStackParamList,
+} from './src/configs/navigation.route';
 import routes from './src/configs/routes';
 import {StatusBar, View} from 'react-native';
 
-// const Tab = createBottomTabNavigator();
-
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -31,7 +30,7 @@ export default function App() {
                   key={index}
                   name={config.name}
                   component={config.element}
-                  options={{headerShown: false}}
+                  options={{...config.options, headerShown: false}}
                 />
               ))}
             </Stack.Navigator>
