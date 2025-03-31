@@ -28,6 +28,7 @@ export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
     navigation.push(routes.detail, {
       id: data.id,
       permalink: data.permalink,
+      type: data.type,
     });
   };
 

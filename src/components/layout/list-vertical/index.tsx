@@ -6,7 +6,7 @@ import ItemVerticalComp from './item';
 type SizeType = 'small' | 'medium' | 'large';
 
 interface ListVerticalCompProps {
-  title: string;
+  title?: string;
   style?: any;
   data: PreviewCartModel[];
   size?: SizeType;
@@ -20,7 +20,7 @@ export default function ListVerticalComp(props: ListVerticalCompProps) {
   return (
     <View style={style}>
       <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
+        {title && <Text style={styles.title}>{title}</Text>}
         <View style={styles.list}>
           <FlatList
             data={data}

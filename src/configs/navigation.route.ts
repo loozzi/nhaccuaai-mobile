@@ -14,7 +14,7 @@ interface NavigationConfig {
 
 export type RootStackParamList = {
   [key: string]: any;
-  [routes.detail]: {id: number; permalink?: string};
+  [routes.detail]: {id: number; permalink?: string; type?: string};
 };
 
 const navigationConfig: NavigationConfig[] = [

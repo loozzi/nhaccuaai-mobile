@@ -26,7 +26,7 @@ export default function TabNavigation() {
           } else if (route.name === t.search) {
             iconName = focused ? 'search' : 'search-outline';
           } else if (route.name === t.library) {
-            iconName = focused ? 'layers' : 'layers-outline';
+            iconName = focused ? 'albums' : 'albums-outline';
           } else if (route.name === t.create) {
             iconName = focused ? 'add-circle' : 'add-circle-outline';
           }
