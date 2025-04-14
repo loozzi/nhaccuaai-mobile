@@ -60,3 +60,17 @@ export const setMuted = (
 ) => {
   state.muted = actions.payload || false;
 };
+
+export const setShuffle = (
+  state: PlayerState,
+  actions: PlayerAction<boolean>,
+) => {
+  state.isShuffle = actions.payload || false;
+};
+
+export const setRepeat = (
+  state: PlayerState,
+  actions: PlayerAction<boolean>,
+) => {
+  state.isRepeat = actions.payload || false;
+};

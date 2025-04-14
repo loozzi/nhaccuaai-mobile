@@ -13,6 +13,8 @@ import {
 
 const initialState: PlayerState = {
   isPlaying: false,
+  isShuffle: false,
+  isRepeat: false,
   currentTime: 0,
   duration: 0,
   volume: 1,
