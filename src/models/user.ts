@@ -4,3 +4,9 @@ export interface Author {
   permalink: string;
   image: string;
 }
+
+export interface UserSignUpPayload {
+  email: string;
+  password: string;
+  rePassword: string;
+}

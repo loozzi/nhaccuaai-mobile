@@ -17,7 +17,7 @@ export type RootStackParamList = {
   [routes.detail]: {id: number; permalink?: string; type?: string};
 };
 
-const navigationConfig: NavigationConfig[] = [
+export const publicNavigationConfig: NavigationConfig[] = [
   {
     element: TabNavigation,
     name: routes.home,
@@ -32,4 +32,4 @@ const navigationConfig: NavigationConfig[] = [
   },
 ];
 
-export default navigationConfig;
+export const privateNavigationConfig: NavigationConfig[] = [];

@@ -73,5 +73,9 @@
     "trending": "Xu hướng",
     "song": "Bài hát",
     "album": "Album",
-    "artist": "Nghệ sĩ"
+    "artist": "Nghệ sĩ",
+    "existAccount": "Tài khoản đã tồn tại",
+    "notMatchPassword": "Mật khẩu không khớp",
+    "passwordLength": "Mật khẩu phải có ít nhất 6 ký tự",
+    "emailInvalid": "Email không hợp lệ"
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "531994377837",
+    "project_id": "nhaccuaai-ba981",
+    "storage_bucket": "nhaccuaai-ba981.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531994377837:android:85a9ad92786a196cda4964",
+        "android_client_info": {
+          "package_name": "com.nhaccuaai_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531994377837-giemp4f4llh0hjjk255alre34btifjkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgvyCtjeRR3gk781_Tt7MdVCoobfpodlk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531994377837-giemp4f4llh0hjjk255alre34btifjkl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

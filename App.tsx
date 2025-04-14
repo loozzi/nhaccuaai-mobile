@@ -3,44 +3,33 @@ import {LanguageProvider} from './src/contexts/languageContext';
 import {ThemeProvider} from './src/contexts/themeContext';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import navigationConfig, {
-  RootStackParamList,
-} from './src/configs/navigation.route';
-import routes from './src/configs/routes';
+import {RootStackParamList} from './src/configs/navigation.route';
 import {StatusBar, View} from 'react-native';
+import AuthNavigator from './src/navigation/auth';
+import {Provider as ReduxProvider} from 'react-redux';
+import {store} from './src/app/store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <NavigationContainer>
-          <View
-            style={{
-              flex: 1,
-              marginTop: StatusBar.currentHeight,
-              paddingTop: 0,
-            }}>
-            {/* TODO: Sửa style của status bar theo theme */}
-            <StatusBar barStyle="dark-content" />
-            <Stack.Navigator initialRouteName={routes.home}>
-              {navigationConfig.map((config, index) => (
-                <Stack.Screen
-                  key={index}
-                  name={config.name}
-                  component={config.element}
-                  options={{...config.options, headerShown: false}}
-                />
-              ))}
-            </Stack.Navigator>
-          </View>
-          {/* <Tab.Navigator screenOptions={({route}) => ({})}>
-            <Tab.Screen component={HomeScreen} name="Home" />
-            <Tab.Screen component={SignInScreen} name="SignInScreen" />
-          </Tab.Navigator> */}
-        </NavigationContainer>
-      </LanguageProvider>
-    </ThemeProvider>
+    <ReduxProvider store={store}>
+      <ThemeProvider>
+        <LanguageProvider>
+          <NavigationContainer>
+            <View
+              style={{
+                flex: 1,
+                marginTop: StatusBar.currentHeight,
+                paddingTop: 0,
+              }}>
+              {/* TODO: Sửa style của status bar theo theme */}
+              <StatusBar barStyle="dark-content" />
+              <AuthNavigator Stack={Stack} />
+            </View>
+          </NavigationContainer>
+        </LanguageProvider>
+      </ThemeProvider>
+    </ReduxProvider>
   );
 }

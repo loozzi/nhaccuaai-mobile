@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -14,12 +14,49 @@ import TextButtonComp from '../../components/common/text-button';
 import routes from '../../configs/routes';
 import useLanguage from '../../hook/useLanguage';
 import useTheme from '../../hook/useTheme';
+import {useFormik} from 'formik';
+import {UserSignUpPayload} from '../../models/user';
+import auth from '@react-native-firebase/auth';
 
 export default function SignUpScreen() {
   const {t} = useLanguage();
   const {currentTheme} = useTheme();
   const styles = createStyles(currentTheme);
   const navigation: any = useNavigation();
+  const [errorText, setErrorText] = useState('');
+  const formik = useFormik<UserSignUpPayload>({
+    initialValues: {
+      email: '',
+      password: '',
+      rePassword: '',
+    },
+    onSubmit: values => {
+      handleSignUpWithEmail(values);
+    },
+    validate: values => {
+      const errors: any = {};
+
+      if (!values.email) {
+        errors.email = t.required;
+      } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+        errors.email = t.invalidEmail;
+      }
+
+      if (!values.password) {
+        errors.password = t.required;
+      } else if (values.password.length < 8) {
+        errors.password = t.passwordLength;
+      }
+
+      if (!values.rePassword) {
+        errors.rePassword = t.required;
+      } else if (values.rePassword !== values.password) {
+        errors.rePassword = t.passwordNotMatch;
+      }
+
+      return errors;
+    },
+  });
 
   const handleSignIn = () => {
     navigation.push(routes.auth.signin);
@@ -29,10 +66,31 @@ export default function SignUpScreen() {
     if (type === 'facebook') {
     } else if (type === 'google') {
     } else if (type === 'apple') {
-    } else {
-      // Sign in with email and password
-      navigation.push(routes.home);
     }
+  };
+
+  const handleSignUpWithEmail = (data: UserSignUpPayload) => {
+    // Handle sign up with email and password
+    if (data.password !== data.rePassword) {
+      setErrorText(t.notMatchPassword);
+      return;
+    }
+    console.log('Sign up with email and password', data);
+    auth()
+      .createUserWithEmailAndPassword(data.email, data.password)
+      .then(() => {
+        setErrorText('');
+        navigation.push(routes.auth.signin);
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          setErrorText(t.existAccount);
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          setErrorText(t.emailInvalid);
+        }
+      });
   };
 
   return (
@@ -50,28 +108,30 @@ export default function SignUpScreen() {
           placeholder={t.email}
           keyboardType="email-address"
           autoCapitalize="none"
+          value={formik.values.email}
+          onChangeText={formik.handleChange('email')}
         />
         <TextInput
           style={styles.input}
           placeholder={t.password}
           secureTextEntry={true}
           autoCapitalize="none"
+          value={formik.values.password}
+          onChangeText={formik.handleChange('password')}
         />
         <TextInput
           style={styles.input}
           placeholder={t.rePassword}
           secureTextEntry={true}
           autoCapitalize="none"
+          value={formik.values.rePassword}
+          onChangeText={formik.handleChange('rePassword')}
         />
+        {errorText && <Text style={styles.errorText}>{errorText}</Text>}
         <View style={styles.signin}>
           {/* Sign In Button */}
-          <ButtonComp
-            text={t.signup}
-            fullWidth
-            onPress={() => handleSignUp('password')}
-          />
+          <ButtonComp text={t.signup} fullWidth onPress={formik.handleSubmit} />
         </View>
-
         <Text style={styles.forgotPassword}>
           {t.or} {t.signUpWith}
         </Text>
@@ -135,6 +195,12 @@ const createStyles = (theme: any) =>
     },
     signin: {
       marginTop: 16,
+    },
+    errorText: {
+      color: 'red',
+      fontSize: 12,
+      marginTop: 4,
+      textAlign: 'center',
     },
     forgotPassword: {
       alignSelf: 'center',
