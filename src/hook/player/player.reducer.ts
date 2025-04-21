@@ -1,7 +1,11 @@
 import {Track} from '../../models/track';
-import {PlayerAction, PlayerState} from './player.types';
+import {PlayerState} from './player.types';
+import {PayloadAction} from '@reduxjs/toolkit';
 
-export const playTrack = (state: PlayerState, actions: PlayerAction<Track>) => {
+export const playTrack = (
+  state: PlayerState,
+  actions: PayloadAction<Track>,
+) => {
   state.isPlaying = true;
   state.currentTime = 0;
   state.duration = actions.payload?.duration || 0;
@@ -40,37 +44,44 @@ export const prevTrack = (state: PlayerState) => {
   }
 };
 
+export const setNextTrack = (
+  state: PlayerState,
+  actions: PayloadAction<Track[]>,
+) => {
+  state.nextTrack = [...actions.payload];
+};
+
 export const seekTrack = (
   state: PlayerState,
-  actions: PlayerAction<number>,
+  actions: PayloadAction<number>,
 ) => {
   state.currentTime = actions.payload || 0;
 };
 
 export const setVolume = (
   state: PlayerState,
-  actions: PlayerAction<number>,
+  actions: PayloadAction<number>,
 ) => {
   state.volume = actions.payload || 1;
 };
 
 export const setMuted = (
   state: PlayerState,
-  actions: PlayerAction<boolean>,
+  actions: PayloadAction<boolean>,
 ) => {
   state.muted = actions.payload || false;
 };
 
 export const setShuffle = (
   state: PlayerState,
-  actions: PlayerAction<boolean>,
+  actions: PayloadAction<boolean>,
 ) => {
   state.isShuffle = actions.payload || false;
 };
 
 export const setRepeat = (
   state: PlayerState,
-  actions: PlayerAction<boolean>,
+  actions: PayloadAction<boolean>,
 ) => {
   state.isRepeat = actions.payload || false;
 };

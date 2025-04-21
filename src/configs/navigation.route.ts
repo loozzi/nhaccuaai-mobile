@@ -6,7 +6,7 @@ import SignInScreen from '../screens/signin';
 import SignUpScreen from '../screens/signup';
 import routes from './routes';
 
-interface NavigationConfig {
+export interface NavigationConfig {
   element: any;
   name: string;
   options?: NativeStackNavigationOptions;

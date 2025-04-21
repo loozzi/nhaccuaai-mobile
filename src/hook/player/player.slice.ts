@@ -9,6 +9,9 @@ import {
   seekTrack,
   setVolume,
   setMuted,
+  setShuffle,
+  setRepeat,
+  setNextTrack,
 } from './player.reducer';
 
 const initialState: PlayerState = {
@@ -36,6 +39,9 @@ export const playerSlice = createSlice({
     seekTrack,
     setVolume,
     setMuted,
+    setShuffle,
+    setRepeat,
+    setNextTrack,
   },
 });
 
@@ -45,6 +51,8 @@ export const playerActions = playerSlice.actions;
 export const selectPlayer = (state: {player: PlayerState}) => state.player;
 export const selectIsPlaying = (state: {player: PlayerState}) =>
   state.player.isPlaying;
+export const selectIsShuffle = (state: {player: PlayerState}) =>
+  state.player.isShuffle;
 export const selectCurrentTime = (state: {player: PlayerState}) =>
   state.player.currentTime;
 export const selectDuration = (state: {player: PlayerState}) =>

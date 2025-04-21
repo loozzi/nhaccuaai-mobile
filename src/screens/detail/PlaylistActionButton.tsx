@@ -2,18 +2,28 @@ import Icon from '@react-native-vector-icons/ionicons';
 import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import useLanguage from '../../hook/useLanguage';
+import {useAppDispatch, useAppSelector} from '../../app/hook';
+import {
+  playerActions,
+  selectIsPlaying,
+  selectIsShuffle,
+} from '../../hook/player/player.slice';
+import {Track} from '../../models/track';
 
 interface PlaylistActionButtonProps {
   style?: any;
-  data: any;
+  data: Track[];
 }
 
 export default function PlaylistActionButton(props: PlaylistActionButtonProps) {
-  const {style} = props;
+  const {style, data} = props;
   const {t} = useLanguage();
+  const dispatch = useAppDispatch();
 
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isShuffle, setIsShuffle] = useState<boolean>(true);
+  // Player State
+  const isPlaying = useAppSelector(selectIsPlaying);
+  const isShuffle = useAppSelector(selectIsShuffle);
+
   const [isDownloaded, setIsDownloaded] = useState<boolean>(false);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
@@ -26,11 +36,21 @@ export default function PlaylistActionButton(props: PlaylistActionButtonProps) {
   };
 
   const handleShuffleToggle = () => {
-    setIsShuffle(!isShuffle);
+    dispatch(playerActions.setShuffle(!isShuffle));
   };
 
   const handlePlayPauseToggle = () => {
-    setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      dispatch(playerActions.pauseTrack());
+    } else if (isShuffle) {
+      dispatch(playerActions.playTrack(data[0]));
+    } else {
+      const currentTrack = data[0];
+      dispatch(playerActions.playTrack(data[0]));
+      dispatch(
+        playerActions.setNextTrack(data.filter(e => e.id !== currentTrack.id)),
+      );
+    }
   };
 
   return (

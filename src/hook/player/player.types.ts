@@ -12,8 +12,3 @@ export interface PlayerState {
   prevTrack: Track[];
   nextTrack: Track[];
 }
-
-export interface PlayerAction<T> {
-  type: string;
-  payload?: T;
-}

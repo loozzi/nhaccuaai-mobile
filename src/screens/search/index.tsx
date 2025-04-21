@@ -14,8 +14,12 @@ import ListVerticalComp from '../../components/layout/list-vertical';
 import {PreviewCartModel} from '../../models/preview';
 import routes from '../../configs/routes';
 import {NavigationProps} from '../../models/navigation';
+import {useAppDispatch} from '../../app/hook';
+import {playerActions} from '../../hook/player/player.slice';
 
 export default function SearchScreen() {
+  const dispatch = useAppDispatch();
+
   const {t} = useLanguage();
   const navigation = useNavigation<NavigationProps>();
   const [search, setSearch] = useState<string>('');
@@ -182,10 +186,14 @@ export default function SearchScreen() {
   };
 
   const handleGoToDetail = (item: PreviewCartModel) => {
-    navigation.push(routes.detail, {
-      id: item.id,
-      permalink: item.permalink,
-    });
+    if (item.type === 'track') {
+      // TODO: Call API and set playtrack
+      // dispatch(playerActions.playTrack(track: Track));
+    } else
+      navigation.push(routes.detail, {
+        id: item.id,
+        permalink: item.permalink,
+      });
   };
 
   useEffect(() => {
