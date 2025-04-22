@@ -1,5 +1,5 @@
 import Icon from '@react-native-vector-icons/ionicons';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import useLanguage from '../../hook/useLanguage';
 import {useAppDispatch, useAppSelector} from '../../app/hook';
@@ -40,16 +40,24 @@ export default function PlaylistActionButton(props: PlaylistActionButtonProps) {
   };
 
   const handlePlayPauseToggle = () => {
-    if (isPlaying) {
-      dispatch(playerActions.pauseTrack());
-    } else if (isShuffle) {
-      dispatch(playerActions.playTrack(data[0]));
+    if (data) {
+      if (isPlaying) {
+        dispatch(playerActions.pauseTrack());
+      } else if (isShuffle) {
+        console.log(data[0]);
+        dispatch(playerActions.playTrack(data[0]));
+      } else {
+        const currentTrack = data[0];
+        console.log(currentTrack);
+        dispatch(playerActions.playTrack(data[0]));
+        dispatch(
+          playerActions.setNextTrack(
+            data.filter(e => e.id !== currentTrack.id),
+          ),
+        );
+      }
     } else {
-      const currentTrack = data[0];
-      dispatch(playerActions.playTrack(data[0]));
-      dispatch(
-        playerActions.setNextTrack(data.filter(e => e.id !== currentTrack.id)),
-      );
+      console.log('No track available to play');
     }
   };
 

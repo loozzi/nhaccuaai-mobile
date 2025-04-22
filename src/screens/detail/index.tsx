@@ -266,7 +266,7 @@ export default function DetailScreen() {
             <Text></Text>
           </TouchableOpacity>
         </View>
-        <PlaylistActionButton data={data} />
+        <PlaylistActionButton data={data.tracks} />
         <View style={styles.listTracks}>
           {/* List tracks */}
           <ListVerticalComp
