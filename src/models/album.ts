@@ -27,11 +27,3 @@ export interface AlbumUpdate {
   release_date?: string;
   artist_ids?: number[];
 }
-
-export interface PaginatedAlbumResponse {
-  items: Album[];
-  total: number;
-  page: number;
-  size: number;
-  pages: number;
-}

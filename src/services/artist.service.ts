@@ -1,10 +1,6 @@
 import apiService from './api.service';
-import {
-  Artist,
-  ArtistCreate,
-  ArtistUpdate,
-  PaginatedArtistResponse,
-} from '../models/artist';
+import {Artist, ArtistCreate, ArtistUpdate} from '../models/artist';
+import {PaginatedResponse} from '../models/utils';
 
 class ArtistService {
   private readonly baseUrl = '/artist';
@@ -20,8 +16,8 @@ class ArtistService {
     limit: number = 10,
     page: number = 1,
     keyword: string = '',
-  ): Promise<PaginatedArtistResponse> {
-    return apiService.get<PaginatedArtistResponse>(
+  ): Promise<PaginatedResponse<Artist>> {
+    return apiService.get<PaginatedResponse<Artist>>(
       `${
         this.baseUrl
       }/?limit=${limit}&page=${page}&keyword=${encodeURIComponent(keyword)}`,

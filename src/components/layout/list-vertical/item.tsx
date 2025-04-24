@@ -38,7 +38,7 @@ export default function ItemVerticalComp(props: ItemVerticalCompProps) {
             {data.name}
           </Text>
           <Text style={styles.artist} numberOfLines={1}>
-            {t[data.type]} - {data.artist}
+            {t[data.type]} - {data.artist.name}
           </Text>
         </View>
         {showRemove && (

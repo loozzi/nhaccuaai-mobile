@@ -21,11 +21,3 @@ export interface ArtistUpdate {
   permalink?: string;
   genres?: number[];
 }
-
-export interface PaginatedArtistResponse {
-  items: Artist[];
-  total: number;
-  page: number;
-  size: number;
-  pages: number;
-}

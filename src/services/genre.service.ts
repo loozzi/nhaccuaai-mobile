@@ -1,10 +1,6 @@
 import apiService from './api.service';
-import {
-  Genre,
-  GenreCreate,
-  GenreUpdate,
-  PaginatedGenreResponse,
-} from '../models/genre';
+import {Genre, GenreCreate, GenreUpdate} from '../models/genre';
+import {PaginatedResponse} from '../models/utils';
 
 class GenreService {
   private readonly baseUrl = '/genre';
@@ -20,8 +16,8 @@ class GenreService {
     limit: number = 10,
     page: number = 1,
     keyword: string = '',
-  ): Promise<PaginatedGenreResponse> {
-    return apiService.get<PaginatedGenreResponse>(
+  ): Promise<PaginatedResponse<Genre>> {
+    return apiService.get<PaginatedResponse<Genre>>(
       `${
         this.baseUrl
       }/?limit=${limit}&page=${page}&keyword=${encodeURIComponent(keyword)}`,

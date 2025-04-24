@@ -15,11 +15,3 @@ export interface GenreUpdate {
   name?: string;
   permalink?: string;
 }
-
-export interface PaginatedGenreResponse {
-  items: Genre[];
-  total: number;
-  page: number;
-  size: number;
-  pages: number;
-}

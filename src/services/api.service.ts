@@ -7,7 +7,7 @@ import axios, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const apiInstance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://10.0.2.2:5000/api',
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ apiInstance.interceptors.request.use(
 
 apiInstance.interceptors.response.use(
   response => {
-    return response;
+    return response.data;
   },
   async error => {
     const originalRequest = error.config;

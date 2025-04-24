@@ -1,10 +1,7 @@
 import apiService from './api.service';
-import {
-  TrackCreate,
-  TrackUpdate,
-  Track,
-  PaginatedTrackResponse,
-} from '../models/track';
+import {TrackCreate, TrackUpdate, Track} from '../models/track';
+import {PaginatedResponse} from '../models/utils';
+import {PreviewCartModel} from '../models/preview';
 
 class TrackService {
   private readonly baseUrl = '/track';
@@ -20,8 +17,8 @@ class TrackService {
     limit: number = 10,
     page: number = 1,
     keyword: string = '',
-  ): Promise<PaginatedTrackResponse> {
-    return apiService.get<PaginatedTrackResponse>(
+  ): Promise<PaginatedResponse<PreviewCartModel>> {
+    return apiService.get<PaginatedResponse<PreviewCartModel>>(
       `${
         this.baseUrl
       }/?limit=${limit}&page=${page}&keyword=${encodeURIComponent(keyword)}`,

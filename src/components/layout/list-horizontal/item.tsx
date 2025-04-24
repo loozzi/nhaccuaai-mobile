@@ -47,7 +47,7 @@ export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
             {data.name}
           </Text>
           <Text style={styles.artist} numberOfLines={1}>
-            {data.artist}
+            {data.artist.name}
           </Text>
         </View>
       </TouchableOpacity>
