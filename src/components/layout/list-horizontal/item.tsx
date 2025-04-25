@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {PreviewCartModel} from '../../../models/preview';
+import {PreviewModel} from '../../../models/preview';
 import Icon from '@react-native-vector-icons/ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -11,7 +11,7 @@ type SizeType = 'small' | 'medium' | 'large';
 
 interface ItemCartPreviewCompProps {
   style?: any;
-  data: PreviewCartModel;
+  data: PreviewModel;
   size?: SizeType;
 }
 

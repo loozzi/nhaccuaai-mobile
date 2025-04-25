@@ -1,6 +1,7 @@
 import apiService from './api.service';
 import {Album, AlbumCreate, AlbumUpdate} from '../models/album';
 import {PaginatedResponse} from '../models/utils';
+import {PreviewModel} from '../models/preview';
 
 class AlbumService {
   private readonly baseUrl = '/album';
@@ -16,8 +17,8 @@ class AlbumService {
     limit: number = 10,
     page: number = 1,
     keyword: string = '',
-  ): Promise<PaginatedResponse<Album>> {
-    return apiService.get<PaginatedResponse<Album>>(
+  ): Promise<PaginatedResponse<PreviewModel>> {
+    return apiService.get<PaginatedResponse<PreviewModel>>(
       `${
         this.baseUrl
       }/?limit=${limit}&page=${page}&keyword=${encodeURIComponent(keyword)}`,

@@ -1,3 +1,7 @@
+import {Artist} from './artist';
+import {PreviewModel} from './preview';
+import {Track} from './track';
+
 export interface Album {
   id: number;
   name: string;
@@ -5,7 +9,8 @@ export interface Album {
   permalink: string;
   album_type: string;
   release_date: string;
-  artist_ids?: number[];
+  artists: Artist[];
+  tracks: PreviewModel[];
   created_at?: string;
   updated_at?: string;
 }

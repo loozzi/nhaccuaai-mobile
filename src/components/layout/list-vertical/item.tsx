@@ -1,15 +1,15 @@
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {PreviewCartModel} from '../../../models/preview';
+import {PreviewModel} from '../../../models/preview';
 import Icon from '@react-native-vector-icons/ionicons';
 import useLanguage from '../../../hook/useLanguage';
 
 interface ItemVerticalCompProps {
-  data: PreviewCartModel;
+  data: PreviewModel;
   style?: any;
   size?: 'small' | 'medium' | 'large';
-  onPress?: (item: PreviewCartModel) => void;
-  onRemove?: (item: PreviewCartModel) => void;
+  onPress?: (item: PreviewModel) => void;
+  onRemove?: (item: PreviewModel) => void;
   showRemove?: boolean;
 }
 

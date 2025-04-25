@@ -11,7 +11,7 @@ import useLanguage from '../../hook/useLanguage';
 import {useNavigation} from '@react-navigation/native';
 import SearchComp from './search';
 import ListVerticalComp from '../../components/layout/list-vertical';
-import {PreviewCartModel} from '../../models/preview';
+import {PreviewModel} from '../../models/preview';
 import routes from '../../configs/routes';
 import {NavigationProps} from '../../models/navigation';
 import {useAppDispatch, useAppSelector} from '../../app/hook';
@@ -26,18 +26,18 @@ export default function SearchScreen() {
   const {t} = useLanguage();
   const navigation = useNavigation<NavigationProps>();
   const [search, setSearch] = useState<string>('');
-  const [data, setData] = useState<PreviewCartModel[]>([]);
+  const [data, setData] = useState<PreviewModel[]>([]);
 
   const handleClearAllHistory = () => {
     setData([]);
   };
 
-  const handleRemoveOne = (removeData: PreviewCartModel) => {
+  const handleRemoveOne = (removeData: PreviewModel) => {
     const newData = data.filter(item => item.id !== removeData.id);
     setData(newData);
   };
 
-  const handleGoToDetail = (item: PreviewCartModel) => {
+  const handleGoToDetail = (item: PreviewModel) => {
     if (item.type === 'track') {
       // TODO: Call API and set playtrack
       // dispatch(playerActions.playTrack(track: Track));
@@ -53,7 +53,7 @@ export default function SearchScreen() {
       console.log('search', search);
       trackService
         .getTracks(10, 1, search)
-        .then((res: PaginatedResponse<PreviewCartModel>) => {
+        .then((res: PaginatedResponse<PreviewModel>) => {
           setData(res.items);
         });
     }, 200);

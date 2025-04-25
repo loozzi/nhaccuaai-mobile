@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React from 'react';
-import {PreviewCartModel} from '../../../models/preview';
+import {PreviewModel} from '../../../models/preview';
 import ItemCartPreviewComp from './item';
 
 type SizeType = 'small' | 'medium' | 'large';
@@ -8,7 +8,7 @@ type SizeType = 'small' | 'medium' | 'large';
 interface ListHorizontalCompProps {
   title: string;
   style?: any;
-  data: PreviewCartModel[];
+  data: PreviewModel[];
   size?: SizeType;
 }
 

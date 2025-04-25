@@ -1,9 +1,12 @@
+import {PreviewModel} from './preview';
+
 export interface Artist {
   id: number;
   name: string;
   image: string;
   permalink: string;
   genres?: number[];
+  tracks: PreviewModel[];
   created_at?: string;
   updated_at?: string;
 }

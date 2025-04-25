@@ -1,6 +1,6 @@
 import {Artist} from './artist';
 
-export interface PreviewCartModel {
+export interface PreviewModel {
   id: number;
   name: string;
   image: string;

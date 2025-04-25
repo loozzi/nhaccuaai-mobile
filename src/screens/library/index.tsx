@@ -6,25 +6,14 @@ import ListVerticalComp from '../../components/layout/list-vertical';
 import routes from '../../configs/routes';
 import useLanguage from '../../hook/useLanguage';
 import {NavigationProps} from '../../models/navigation';
-import {PreviewCartModel} from '../../models/preview';
+import {PreviewModel} from '../../models/preview';
 
 export default function LibraryScreen() {
   const {t} = useLanguage();
   const navigation = useNavigation<NavigationProps>();
-  const [data, setData] = useState<PreviewCartModel[]>([
-    {
-      id: 1,
-      name: 'Die for You',
-      artist: 'The Weeknd',
-      image:
-        'https://avatar-ex-swe.nixcdn.com/song/2021/11/26/4/a/f/f/1637909633351_640.jpg',
-      permalink: 'https://example.com/die-for-you',
-      type: 'playlist',
-      duration: 200,
-    },
-  ]);
+  const [data, setData] = useState<PreviewModel[]>([]);
 
-  const handleGoToDetail = (item: PreviewCartModel) => {
+  const handleGoToDetail = (item: PreviewModel) => {
     navigation.push(routes.detail, {
       id: item.id,
       permalink: item.permalink,
@@ -40,7 +29,7 @@ export default function LibraryScreen() {
           data={data}
           size="large"
           onPress={handleGoToDetail}
-          onRemove={(item: PreviewCartModel) => {
+          onRemove={(item: PreviewModel) => {
             setData(data.filter(i => i.id !== item.id));
           }}
         />

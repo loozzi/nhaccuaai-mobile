@@ -1,4 +1,4 @@
-import {PreviewCartModel} from './preview';
+import {PreviewModel} from './preview';
 
 export type TrackType = 'track' | 'playlist' | 'album' | 'artist' | 'genre';
 

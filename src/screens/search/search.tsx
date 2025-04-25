@@ -1,14 +1,7 @@
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Touchable,
-  TouchableOpacity,
-} from 'react-native';
-import React, {useState} from 'react';
-import useLanguage from '../../hook/useLanguage';
 import Icon from '@react-native-vector-icons/ionicons';
+import React from 'react';
+import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
+import useLanguage from '../../hook/useLanguage';
 
 interface SearchCompProps {
   search: string;
