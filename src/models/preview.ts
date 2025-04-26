@@ -4,7 +4,7 @@ export interface PreviewModel {
   id: number;
   name: string;
   image: string;
-  artist: Artist;
+  artists: Artist[];
   permalink: string;
   type: string;
   duration?: number;

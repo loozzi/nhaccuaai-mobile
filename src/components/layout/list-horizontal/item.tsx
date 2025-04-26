@@ -46,8 +46,8 @@ export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
           <Text style={styles.title} numberOfLines={1}>
             {data.name}
           </Text>
-          <Text style={styles.artist} numberOfLines={1}>
-            {data.artist.name}
+          <Text style={styles.artist} numberOfLines={size === 'large' ? 2 : 1}>
+            {data.artists.map(item => item.name).join(', ')}
           </Text>
         </View>
       </TouchableOpacity>

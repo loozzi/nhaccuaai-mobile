@@ -15,6 +15,18 @@ export interface Album {
   updated_at?: string;
 }
 
+export interface AlbumPreview {
+  name: string;
+  image: string;
+  permalink: string;
+  album_type: string;
+  release_date: string;
+  id: number;
+  is_deleted: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface AlbumCreate {
   name: string;
   image?: string;
