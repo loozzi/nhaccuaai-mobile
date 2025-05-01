@@ -1,3 +1,4 @@
+import {PreviewModel} from '../../models/preview';
 import {Track} from '../../models/track';
 
 export interface PlayerState {
@@ -8,7 +9,7 @@ export interface PlayerState {
   duration: number;
   volume: number;
   muted: boolean;
-  currentTrack: Track | undefined;
-  prevTrack: Track[];
-  nextTrack: Track[];
+  currentTrack: PreviewModel | undefined;
+  prevTrack: PreviewModel[];
+  nextTrack: PreviewModel[];
 }

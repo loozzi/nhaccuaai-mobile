@@ -1,32 +1,27 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import HeaderComp from '../../components/layout/header';
-import useLanguage from '../../hook/useLanguage';
 import ListHorizontalComp from '../../components/layout/list-horizontal';
-import {PreviewCartModel} from '../../models/preview';
+import useLanguage from '../../hook/useLanguage';
+import {PreviewModel} from '../../models/preview';
+import albumService from '../../services/album.service';
 import trackService from '../../services/track.service';
-import {PaginatedResponse} from '../../models/utils';
 
 export default function HomeScreen() {
   const navigation: {push: any} = useNavigation();
   const {t} = useLanguage();
-  const [popular, setPopular] = useState<PreviewCartModel[]>([]);
-  const [trending, setTrending] = useState<PreviewCartModel[]>([]);
+  const [popular, setPopular] = useState<PreviewModel[]>([]);
+  const [trending, setTrending] = useState<PreviewModel[]>([]);
 
   useEffect(() => {
-    trackService
-      .getTracks(10, 1)
-      .then((res: PaginatedResponse<PreviewCartModel>) => {
-        setTrending(res.items);
-        setPopular(res.items);
-      });
+    trackService.getTracks(10, 1).then(res => {
+      setTrending(res.items);
+    });
+
+    albumService.getAlbums(10, 1).then(res => {
+      setPopular(res.items);
+    });
   }, []);
 
   return (
@@ -37,7 +32,7 @@ export default function HomeScreen() {
         <ListHorizontalComp title={t.trending} data={trending} size="medium" />
         <ListHorizontalComp title={t.trending} data={trending} size="large" />
         <ListHorizontalComp title={t.popular} data={popular} />
-        <View style={{height: 64}}>{/* Padding bottom */}</View>
+        <View style={{height: 136}} />
       </ScrollView>
     </View>
   );

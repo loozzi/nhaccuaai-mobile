@@ -20,8 +20,16 @@ import routes from '../../configs/routes';
 import useLanguage from '../../hook/useLanguage';
 import {NavigationProps} from '../../models/navigation';
 import {Playlist} from '../../models/playlist';
-import {PreviewCartModel} from '../../models/preview';
-import PlaylistActionButton from './PlaylistActionButton';
+import {PreviewModel} from '../../models/preview';
+import PlaylistActionButton from './ActionButton';
+import {Album} from '../../models/album';
+import trackService from '../../services/track.service';
+import albumService from '../../services/album.service';
+import {Artist} from '../../models/artist';
+import artistService from '../../services/artist.service';
+import PlaylistInfoComp from './PlaylistInfoComp';
+import AlbumInfoComp from './AlbumInfoComp';
+import ArtistInfoComp from './ArtistInfoComp';
 
 type DetailScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -34,196 +42,11 @@ export default function DetailScreen() {
   const {id, permalink, type} = route.params;
   const navigation = useNavigation<NavigationProps>();
 
-  const [data, setData] = useState<Playlist>({
-    id: 1,
-    permalink: 'string',
-    name: 'The Weeknd',
-    description: 'The Weeknd playlist',
-    image:
-      'https://media.vov.vn/sites/default/files/styles/large/public/2021-03/the-weeknd-press-photo-2020-billboard-jgk-1548-1586968737-1024x677.jpg',
-    num_tracks: 5,
-    duration: 1200,
-    tracks: [
-      {
-        id: 1,
-        name: 'Die for You',
-        image:
-          'https://avatar-ex-swe.nixcdn.com/song/2021/11/26/4/a/f/f/1637909633351_640.jpg',
-        permalink: 'https://example.com/die-for-you',
-        type: 'song',
-        duration: 200,
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        release_date: '',
-        file_url: '',
-        track_number: 1,
-      },
-      {
-        id: 2,
-        name: 'Blinding Lights',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://i1.sndcdn.com/artworks-Eke4dWZTIrXCkXPW-hX2ihg-t500x500.jpg',
-        permalink: 'https://example.com/blinding-lights',
-        type: 'song',
-        duration: 180,
-        release_date: '',
-        file_url: '',
-        track_number: 2,
-      },
-      {
-        id: 3,
-        name: 'Save Your Tears',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://avatar-ex-swe.nixcdn.com/song/2021/04/23/2/f/5/3/1619153014739_640.jpg',
-        permalink: 'https://example.com/save-your-tears',
-        type: 'song',
-        duration: 210,
-        release_date: '',
-        file_url: '',
-        track_number: 3,
-      },
-      {
-        id: 4,
-        name: 'Take My Breath',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://i1.sndcdn.com/artworks-RapCTPAQ0nGTcJJV-vHI1NA-t500x500.jpg',
-        permalink: 'https://example.com/take-my-breath',
-        type: 'song',
-        duration: 240,
-        release_date: '',
-        file_url: '',
-        track_number: 4,
-      },
-      {
-        id: 5,
-        name: 'Heartless',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://upload.wikimedia.org/wikipedia/en/7/78/The_Weeknd_-_Heartless.png',
-        permalink: 'https://example.com/heartless',
-        type: 'song',
-        duration: 220,
-        release_date: '',
-        file_url: '',
-        track_number: 5,
-      },
-      {
-        id: 6,
-        name: 'Heartless',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://upload.wikimedia.org/wikipedia/en/7/78/The_Weeknd_-_Heartless.png',
-        permalink: 'https://example.com/heartless',
-        type: 'song',
-        duration: 220,
-        release_date: '',
-        file_url: '',
-        track_number: 6,
-      },
-      {
-        id: 7,
-        name: 'Heartless',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://upload.wikimedia.org/wikipedia/en/7/78/The_Weeknd_-_Heartless.png',
-        permalink: 'https://example.com/heartless',
-        type: 'song',
-        duration: 220,
-        release_date: '',
-        file_url: '',
-        track_number: 5,
-      },
-      {
-        id: 8,
-        name: 'Heartless',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://upload.wikimedia.org/wikipedia/en/7/78/The_Weeknd_-_Heartless.png',
-        permalink: 'https://example.com/heartless',
-        type: 'song',
-        duration: 220,
-        release_date: '',
-        file_url: '',
-        track_number: 5,
-      },
-      {
-        id: 9,
-        name: 'Heartless',
-        artists: [
-          {
-            id: 1,
-            name: 'The Weeknd',
-            permalink: 'string',
-          },
-        ],
-        image:
-          'https://upload.wikimedia.org/wikipedia/en/7/78/The_Weeknd_-_Heartless.png',
-        permalink: 'https://example.com/heartless',
-        type: 'song',
-        duration: 220,
-        release_date: '',
-        file_url: '',
-        track_number: 5,
-      },
-    ],
-    author: {
-      id: 1,
-      name: 'NhacCuaAi',
-      permalink: 'string',
-      image:
-        'https://media.vov.vn/sites/default/files/styles/large/public/2021-03/the-weeknd-press-photo-2020-billboard-jgk-1548-1586968737-1024x677.jpg',
-    },
-  });
+  const [data, setData] = useState<Album | Artist | Playlist | undefined>(
+    undefined,
+  );
+
+  const [name, setName] = useState<string>('');
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -231,12 +54,33 @@ export default function DetailScreen() {
 
   const handleShare = () => {};
 
+  // TODO: Handle type = single;
   useEffect(() => {
-    console.log('id', id);
-    console.log('permalink', permalink);
-    console.log('type', type);
+    console.log('Fetching data for type:', type);
+    if (type === 'track') {
+      trackService.getTrackByPermalink(permalink ?? '').then(res => {
+        albumService.getAlbum(res.album_id ?? 0).then(album_res => {
+          setData(album_res);
+        });
+      });
+    } else if (type === 'playlist') {
+    } else if (type === 'artist') {
+      console.log('Fetching data for artist:', id);
+      artistService.getArtist(id).then(res => {
+        setData(res);
+      });
+    } else {
+      albumService.getAlbum(id).then(res => {
+        setData(res);
+      });
+    }
     // Fetch data using id and permalink
   }, [id, permalink, type]);
+
+  useEffect(() => {
+    setName(data?.name ?? '');
+    console.log('Data fetched:', data);
+  }, [data]);
 
   return (
     <View style={styles.container}>
@@ -244,40 +88,30 @@ export default function DetailScreen() {
         <TouchableOpacity style={styles.goBack} onPress={handleGoBack}>
           <Icon name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
-        <Text style={styles.name}>{data.name}</Text>
+        <Text style={styles.name}>{name ? name : ''}</Text>
         <TouchableOpacity style={styles.share} onPress={handleShare}>
           <Icon name="share-social-outline" size={24} color="#000" />
         </TouchableOpacity>
       </View>
-      <ScrollView>
-        <Image source={{uri: data.image}} style={styles.image} />
-        <View style={styles.info}>
-          <TouchableOpacity style={styles.author}>
-            <Image
-              source={{uri: data.author.image}}
-              style={styles.authorImage}
-              resizeMode="cover"
+      {data && (
+        <ScrollView>
+          {(type === 'album' || type === 'single' || type === 'track') && (
+            <AlbumInfoComp data={data as Album} />
+          )}
+          {type === 'artist' && <ArtistInfoComp data={data as Artist} />}
+          {type === 'playlist' && <PlaylistInfoComp data={data as Playlist} />}
+          <View style={styles.listTracks}>
+            {/* List tracks */}
+            <ListVerticalComp
+              data={data.tracks}
+              title={t.tracks}
+              size="small"
+              showRemove={type === 'playlist' ? true : false}
             />
-            <Text style={styles.authorName}>{data.author.name}</Text>
-          </TouchableOpacity>
-          <Text style={styles.description}>{data.description}</Text>
-          <TouchableOpacity>
-            <Image />
-            <Text></Text>
-          </TouchableOpacity>
-        </View>
-        <PlaylistActionButton data={data.tracks} />
-        <View style={styles.listTracks}>
-          {/* List tracks */}
-          <ListVerticalComp
-            data={data.tracks as PreviewCartModel[]}
-            title={t.tracks}
-            size="small"
-            showRemove
-          />
-        </View>
-        <View style={{paddingBottom: 120}} />
-      </ScrollView>
+          </View>
+          <View style={{paddingBottom: 120}} />
+        </ScrollView>
+      )}
     </View>
   );
 }
@@ -296,34 +130,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   info: {},
-  image: {
-    height: 200,
-    aspectRatio: 1,
-    objectFit: 'cover',
-    borderRadius: 10,
-    alignSelf: 'center',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-  },
-  author: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    padding: 16,
-  },
-  authorImage: {
-    width: 20,
-    height: 20,
-    borderRadius: 20,
-    marginRight: 8,
-  },
-  authorName: {
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 14,
-    paddingLeft: 16,
-    color: '#333',
-  },
   actionButton: {
     paddingHorizontal: 16,
   },

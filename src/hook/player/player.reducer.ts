@@ -1,16 +1,17 @@
+import {PreviewModel} from '../../models/preview';
 import {Track} from '../../models/track';
 import {PlayerState} from './player.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 
 export const playTrack = (
   state: PlayerState,
-  actions: PayloadAction<Track>,
+  actions: PayloadAction<PreviewModel>,
 ) => {
   state.isPlaying = true;
   state.currentTime = 0;
   state.duration = actions.payload?.duration || 0;
   state.currentTrack = actions.payload;
-  state.prevTrack.push(state.currentTrack as Track);
+  state.prevTrack.push(state.currentTrack as PreviewModel);
 };
 
 export const pauseTrack = (state: PlayerState) => {
@@ -25,9 +26,9 @@ export const nextTrack = (state: PlayerState) => {
   if (state.nextTrack.length > 0) {
     state.isPlaying = true;
     state.currentTime = 0;
-    state.prevTrack.push(state.currentTrack as Track);
-    state.currentTrack = state.nextTrack.shift() as Track;
-    state.duration = state.currentTrack.duration;
+    state.prevTrack.push(state.currentTrack as PreviewModel);
+    state.currentTrack = state.nextTrack.shift() as PreviewModel;
+    state.duration = state.currentTrack.duration!;
   }
 };
 
@@ -35,9 +36,9 @@ export const prevTrack = (state: PlayerState) => {
   if (state.prevTrack.length > 0) {
     state.isPlaying = true;
     state.currentTime = 0;
-    state.nextTrack.unshift(state.currentTrack as Track);
-    state.currentTrack = state.prevTrack.pop() as Track;
-    state.duration = state.currentTrack.duration;
+    state.nextTrack.unshift(state.currentTrack as PreviewModel);
+    state.currentTrack = state.prevTrack.pop() as PreviewModel;
+    state.duration = state.currentTrack.duration!;
   } else {
     state.isPlaying = true;
     state.currentTime = 0;
@@ -46,7 +47,7 @@ export const prevTrack = (state: PlayerState) => {
 
 export const setNextTrack = (
   state: PlayerState,
-  actions: PayloadAction<Track[]>,
+  actions: PayloadAction<PreviewModel[]>,
 ) => {
   state.nextTrack = [...actions.payload];
 };
