@@ -9,6 +9,7 @@ import {
 } from '../../hook/player/player.slice';
 import useLanguage from '../../hook/useLanguage';
 import {PreviewModel} from '../../models/preview';
+import useTheme from '../../hook/useTheme';
 
 interface ActionButtonProps {
   style?: any;
@@ -18,6 +19,7 @@ interface ActionButtonProps {
 
 export default function ActionButton(props: ActionButtonProps) {
   const {style, data, action} = props;
+  const {currentTheme} = useTheme();
   const {t} = useLanguage();
   const dispatch = useAppDispatch();
 
@@ -62,7 +64,7 @@ export default function ActionButton(props: ActionButtonProps) {
           <Icon
             name={isPlaying ? 'pause-circle' : 'play-circle'}
             size={56}
-            color=""
+            color={currentTheme.primary}
           />
         </TouchableOpacity>
       </View>

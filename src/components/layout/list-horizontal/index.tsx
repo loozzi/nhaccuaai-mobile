@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React from 'react';
 import {PreviewModel} from '../../../models/preview';
 import ItemCartPreviewComp from './item';
+import useTheme from '../../../hook/useTheme';
 
 type SizeType = 'small' | 'medium' | 'large';
 
@@ -14,6 +15,9 @@ interface ListHorizontalCompProps {
 
 export default function ListHorizontalComp(props: ListHorizontalCompProps) {
   const {title, style, data, size} = props;
+  const {currentTheme} = useTheme();
+  const styles = createStyles(currentTheme);
+
   return (
     <View style={style}>
       <View style={styles.container}>
@@ -40,14 +44,16 @@ export default function ListHorizontalComp(props: ListHorizontalCompProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  title: {
-    paddingHorizontal: 16,
-    fontSize: 20,
-    fontWeight: '500',
-  },
-  list: {
-    marginTop: 4,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {},
+    title: {
+      paddingHorizontal: 16,
+      fontSize: 20,
+      fontWeight: '500',
+      color: theme.text,
+    },
+    list: {
+      marginTop: 4,
+    },
+  });

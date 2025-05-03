@@ -3,6 +3,7 @@ import React from 'react';
 import {PreviewModel} from '../../../models/preview';
 import Icon from '@react-native-vector-icons/ionicons';
 import useLanguage from '../../../hook/useLanguage';
+import useTheme from '../../../hook/useTheme';
 
 interface ItemVerticalCompProps {
   data: PreviewModel;
@@ -15,7 +16,8 @@ interface ItemVerticalCompProps {
 
 export default function ItemVerticalComp(props: ItemVerticalCompProps) {
   const {data, style, size, onPress, onRemove, showRemove} = props;
-  const styles = createStyles(size || 'small');
+  const {currentTheme} = useTheme();
+  const styles = createStyles(size || 'small', currentTheme);
   const {t} = useLanguage();
 
   const handlePressRemove = () => {
@@ -51,7 +53,7 @@ export default function ItemVerticalComp(props: ItemVerticalCompProps) {
   );
 }
 
-const createStyles = (size: 'small' | 'medium' | 'large') =>
+const createStyles = (size: 'small' | 'medium' | 'large', theme: any) =>
   StyleSheet.create({
     controller: {
       flexDirection: 'row',
@@ -71,10 +73,12 @@ const createStyles = (size: 'small' | 'medium' | 'large') =>
     },
     artist: {
       fontSize: 14,
+      color: theme.gray,
     },
     name: {
       fontSize: 16,
-      fontWeight: '500',
+      fontWeight: theme.fontWeight,
+      color: theme.text,
     },
     remove: {},
   });

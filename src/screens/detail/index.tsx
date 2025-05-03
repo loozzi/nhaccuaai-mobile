@@ -30,6 +30,7 @@ import artistService from '../../services/artist.service';
 import PlaylistInfoComp from './PlaylistInfoComp';
 import AlbumInfoComp from './AlbumInfoComp';
 import ArtistInfoComp from './ArtistInfoComp';
+import useTheme from '../../hook/useTheme';
 
 type DetailScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -38,6 +39,8 @@ type DetailScreenRouteProp = RouteProp<
 
 export default function DetailScreen() {
   const {t} = useLanguage();
+  const {currentTheme} = useTheme();
+  const styles = createStyles(currentTheme);
   const route = useRoute<DetailScreenRouteProp>();
   const {id, permalink, type} = route.params;
   const navigation = useNavigation<NavigationProps>();
@@ -116,22 +119,24 @@ export default function DetailScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 16,
-  },
-  goBack: {},
-  share: {},
-  name: {
-    fontSize: 20,
-    fontWeight: '500',
-  },
-  info: {},
-  actionButton: {
-    paddingHorizontal: 16,
-  },
-  listTracks: {},
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {},
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 16,
+    },
+    goBack: {},
+    share: {},
+    name: {
+      fontSize: 20,
+      fontWeight: theme.fontWeight,
+      color: theme.text,
+    },
+    info: {},
+    actionButton: {
+      paddingHorizontal: 16,
+    },
+    listTracks: {},
+  });

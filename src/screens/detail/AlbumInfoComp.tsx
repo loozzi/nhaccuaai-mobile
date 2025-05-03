@@ -6,6 +6,7 @@ import {NavigationProps} from '../../models/navigation';
 import routes from '../../configs/routes';
 import ActionButton from './ActionButton';
 import Icon from '@react-native-vector-icons/ionicons';
+import useTheme from '../../hook/useTheme';
 
 interface AlbumInfoCompProps {
   data: Album;
@@ -14,6 +15,8 @@ interface AlbumInfoCompProps {
 
 export default function AlbumInfoComp(props: AlbumInfoCompProps) {
   const {data, style} = props;
+  const {currentTheme} = useTheme();
+  const styles = createStyles(currentTheme);
   const navigation = useNavigation<NavigationProps>();
 
   const [isDownloaded, setIsDownloaded] = useState<boolean>(false);
@@ -85,37 +88,39 @@ export default function AlbumInfoComp(props: AlbumInfoCompProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {},
 
-  info: {},
-  image: {
-    height: 200,
-    aspectRatio: 1,
-    objectFit: 'cover',
-    borderRadius: 10,
-    alignSelf: 'center',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-  },
-  author: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    padding: 16,
-  },
-  authorImage: {
-    width: 20,
-    height: 20,
-    borderRadius: 20,
-    marginRight: 8,
-  },
-  authorName: {
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 14,
-    paddingLeft: 16,
-    color: '#333',
-  },
-  button: {},
-});
+    info: {},
+    image: {
+      height: 200,
+      aspectRatio: 1,
+      objectFit: 'cover',
+      borderRadius: 10,
+      alignSelf: 'center',
+      boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    },
+    author: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 4,
+      padding: 16,
+    },
+    authorImage: {
+      width: 20,
+      height: 20,
+      borderRadius: 20,
+      marginRight: 8,
+    },
+    authorName: {
+      fontWeight: theme.fontWeight,
+      color: theme.text,
+    },
+    description: {
+      fontSize: 14,
+      paddingLeft: 16,
+      color: '#333',
+    },
+    button: {},
+  });

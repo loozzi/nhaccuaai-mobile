@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../configs/navigation.route';
 import routes from '../../../configs/routes';
+import useTheme from '../../../hook/useTheme';
 
 type SizeType = 'small' | 'medium' | 'large';
 
@@ -19,8 +20,10 @@ type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
 
 export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
   const {style, data, size} = props;
+  const {currentTheme} = useTheme();
   const styles = createStyles(
     size === 'large' ? 200 : size === 'medium' ? 150 : 100,
+    currentTheme,
   );
   const navigation = useNavigation<NavigationProps>();
 
@@ -55,7 +58,7 @@ export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
   );
 }
 
-const createStyles = (size: number) =>
+const createStyles = (size: number, theme: any) =>
   StyleSheet.create({
     container: {
       width: size,
@@ -76,9 +79,10 @@ const createStyles = (size: number) =>
     title: {
       fontSize: 16,
       fontWeight: '500',
+      color: theme.text,
     },
     artist: {
       fontSize: 14,
-      color: '#666',
+      color: theme.gray,
     },
   });

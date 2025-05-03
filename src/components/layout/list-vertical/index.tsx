@@ -3,6 +3,7 @@ import React from 'react';
 import {PreviewModel} from '../../../models/preview';
 import ItemVerticalComp from './item';
 import {Track} from '../../../models/track';
+import useTheme from '../../../hook/useTheme';
 
 type SizeType = 'small' | 'medium' | 'large';
 
@@ -18,6 +19,9 @@ interface ListVerticalCompProps {
 
 export default function ListVerticalComp(props: ListVerticalCompProps) {
   const {title, style, data, size, onPress, onRemove, showRemove} = props;
+  const {currentTheme} = useTheme();
+  const styles = createStyles(currentTheme);
+
   return (
     <View style={style}>
       <View style={styles.container}>
@@ -46,14 +50,16 @@ export default function ListVerticalComp(props: ListVerticalCompProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  title: {
-    paddingHorizontal: 16,
-    fontSize: 20,
-    fontWeight: '500',
-  },
-  list: {
-    marginTop: 4,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {},
+    title: {
+      paddingHorizontal: 16,
+      fontSize: 20,
+      fontWeight: theme.fontWeight,
+      color: theme.text,
+    },
+    list: {
+      marginTop: 4,
+    },
+  });

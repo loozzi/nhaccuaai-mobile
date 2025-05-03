@@ -26,6 +26,12 @@ class TrackService {
   }
 
   /**
+   * Play a track by permalink
+   * @param permalink Track permalink
+   * @returns Track permalink
+   */
+
+  /**
    * Create a new track
    * @param trackData Track creation data
    * @returns Created track
