@@ -36,6 +36,7 @@ export default function ListVerticalComp(props: ListVerticalCompProps) {
                 onRemove={onRemove}
                 showRemove={showRemove}
                 size={size}
+                key={index}
               />
             )}
             horizontal={false}

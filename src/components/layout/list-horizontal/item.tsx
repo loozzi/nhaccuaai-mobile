@@ -38,7 +38,13 @@ export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
   return (
     <View style={style}>
       <TouchableOpacity style={styles.container} onPress={handleGoToDetail}>
-        <Image source={{uri: data.image}} style={styles.image} />
+        <Image
+          source={{uri: data.image}}
+          style={{
+            ...styles.image,
+            borderRadius: data.type === 'artist' ? 60 : 8,
+          }}
+        />
         <Icon
           style={styles.playIcon}
           name="play-circle"
@@ -49,9 +55,13 @@ export default function ItemCartPreviewComp(props: ItemCartPreviewCompProps) {
           <Text style={styles.title} numberOfLines={1}>
             {data.name}
           </Text>
-          <Text style={styles.artist} numberOfLines={size === 'large' ? 2 : 1}>
-            {data.artists.map(item => item.name).join(', ')}
-          </Text>
+          {data.type !== 'artist' && (
+            <Text
+              style={styles.artist}
+              numberOfLines={size === 'large' ? 2 : 1}>
+              {data.artists.map(item => item.name).join(', ')}
+            </Text>
+          )}
         </View>
       </TouchableOpacity>
     </View>

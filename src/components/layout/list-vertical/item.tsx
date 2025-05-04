@@ -34,13 +34,21 @@ export default function ItemVerticalComp(props: ItemVerticalCompProps) {
   return (
     <View style={style}>
       <TouchableOpacity style={styles.controller} onPress={handlePress}>
-        <Image source={{uri: data.image}} style={styles.image} />
+        <Image
+          source={{uri: data.image}}
+          style={{
+            ...styles.image,
+            borderRadius: data.type === 'artist' ? 60 : 8,
+          }}
+        />
         <View style={styles.info}>
           <Text style={styles.name} numberOfLines={1}>
             {data.name}
           </Text>
           <Text style={styles.artist} numberOfLines={1}>
-            {t[data.type]} - {data.artists.map(item => item.name).join(', ')}
+            {t[data.type]} -{' '}
+            {data.type !== 'artist' &&
+              data.artists.map(item => item.name).join(', ')}
           </Text>
         </View>
         {showRemove && (
