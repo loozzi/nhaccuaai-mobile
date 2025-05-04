@@ -1,25 +1,26 @@
-import React, {useEffect} from 'react';
-import {LanguageProvider} from './src/contexts/languageContext';
-import {ThemeProvider} from './src/contexts/themeContext';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from './src/configs/navigation.route';
+import React, {useEffect} from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
-import AuthNavigator from './src/navigation/auth';
+import TrackPlayer from 'react-native-track-player';
 import {Provider as ReduxProvider} from 'react-redux';
 import {store} from './src/app/store';
 import StackPlayer from './src/components/layout/stack-player';
-import TrackPlayer from 'react-native-track-player';
+import {RootStackParamList} from './src/configs/navigation.route';
+import {LanguageProvider} from './src/contexts/languageContext';
+import {ThemeProvider} from './src/contexts/themeContext';
+import AuthNavigator from './src/navigation/auth';
+import {setupTrackPlayer} from './src/services/trackPlayer.service';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   useEffect(() => {
     TrackPlayer.setupPlayer().then(async () => {
-      // The player is ready to be used
-      console.log('TrackPlayer setup complete');
+      await setupTrackPlayer();
     });
   }, []);
+
   return (
     <ReduxProvider store={store}>
       <ThemeProvider>
@@ -33,8 +34,8 @@ export default function App() {
               }}>
               {/* TODO: Sửa style của status bar theo theme */}
               <StatusBar barStyle="dark-content" />
-              <StackPlayer style={styles.stackPlayer} />
               <AuthNavigator Stack={Stack} />
+              <StackPlayer style={styles.stackPlayer} />
             </View>
           </NavigationContainer>
         </LanguageProvider>

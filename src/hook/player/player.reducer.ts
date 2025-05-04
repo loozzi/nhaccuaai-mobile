@@ -26,8 +26,8 @@ export const nextTrack = (state: PlayerState) => {
   if (state.nextTrack.length > 0) {
     state.isPlaying = true;
     state.currentTime = 0;
-    state.prevTrack.push(state.currentTrack as PreviewModel);
-    state.currentTrack = state.nextTrack.shift() as PreviewModel;
+    state.prevTrack.push(state.currentTrack!);
+    state.currentTrack = state.nextTrack.shift()!;
     state.duration = state.currentTrack.duration!;
   }
 };
@@ -85,4 +85,11 @@ export const setRepeat = (
   actions: PayloadAction<boolean>,
 ) => {
   state.isRepeat = actions.payload || false;
+};
+
+export const setCurrentTime = (
+  state: PlayerState,
+  actions: PayloadAction<number>,
+) => {
+  state.currentTime = actions.payload || 0;
 };

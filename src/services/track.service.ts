@@ -26,10 +26,26 @@ class TrackService {
   }
 
   /**
+   * Get play url for a track
+   * @param permalink Track permalink
+   * @returns Play url for the track
+   */
+  getPlayUrl(permalink: string): string {
+    return `${apiService.apiInstance.defaults.baseURL}${
+      this.baseUrl
+    }/play/${encodeURIComponent(permalink)}`;
+  }
+
+  /**
    * Play a track by permalink
    * @param permalink Track permalink
    * @returns Track permalink
    */
+  async playTrackByPermalink(permalink: string): Promise<PreviewModel> {
+    return apiService.get<PreviewModel>(
+      `${this.baseUrl}/play/${encodeURIComponent(permalink)}`,
+    );
+  }
 
   /**
    * Create a new track

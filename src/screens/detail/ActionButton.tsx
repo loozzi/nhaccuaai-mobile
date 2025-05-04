@@ -36,17 +36,14 @@ export default function ActionButton(props: ActionButtonProps) {
       if (isPlaying) {
         dispatch(playerActions.pauseTrack());
       } else if (isShuffle) {
-        console.log(data[0]);
+        // console.log(data[0]);
         dispatch(playerActions.playTrack(data[0]));
       } else {
         const currentTrack = data[0];
-        console.log(currentTrack);
+        const nextTrack = data.filter(e => e.id !== currentTrack.id);
+
         dispatch(playerActions.playTrack(data[0]));
-        dispatch(
-          playerActions.setNextTrack(
-            data.filter(e => e.id !== currentTrack.id),
-          ),
-        );
+        dispatch(playerActions.setNextTrack(nextTrack));
       }
     } else {
       console.log('No track available to play');

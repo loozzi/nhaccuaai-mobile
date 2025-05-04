@@ -58,7 +58,7 @@ apiInstance.interceptors.response.use(
 );
 
 class ApiService {
-  private apiInstance: AxiosInstance;
+  public apiInstance: AxiosInstance;
 
   constructor() {
     this.apiInstance = apiInstance;

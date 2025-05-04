@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import Icon from '@react-native-vector-icons/ionicons';
 import {useAppDispatch, useAppSelector} from '../../../app/hook';
 import {playerActions, selectPlayer} from '../../../hook/player/player.slice';
+import {useTrackProgressUpdater} from '../../../services/trackPlayer.service';
 
 interface StackPlayerProps {
   style?: any;
@@ -10,6 +11,7 @@ interface StackPlayerProps {
 
 export default function StackPlayer(props: StackPlayerProps) {
   const dispatch = useAppDispatch();
+  useTrackProgressUpdater();
 
   const {style} = props;
 
@@ -40,7 +42,9 @@ export default function StackPlayer(props: StackPlayerProps) {
         <View
           style={{
             ...styles.progress,
-            width: `${Math.ceil(player.currentTime / player.duration)}%`,
+            width: `${Math.ceil(
+              (player.currentTime / player.duration) * 100000,
+            )}%`,
           }}>
           {/* Progress Bar */}
         </View>
@@ -65,12 +69,18 @@ export default function StackPlayer(props: StackPlayerProps) {
               color="#fff"
             />
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => dispatch(playerActions.prevTrack())}>
+            <Icon name="play-skip-back" size={28} color="#fff" />
+          </TouchableOpacity>
           <TouchableOpacity onPress={handlePlayPauseToggle}>
             <Icon
               name={player.isPlaying ? 'pause' : 'play'}
               size={28}
               color="#fff"
             />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => dispatch(playerActions.nextTrack())}>
+            <Icon name="play-skip-forward" size={28} color="#fff" />
           </TouchableOpacity>
         </View>
       </View>

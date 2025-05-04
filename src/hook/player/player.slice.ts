@@ -12,6 +12,7 @@ import {
   setShuffle,
   setRepeat,
   setNextTrack,
+  setCurrentTime,
 } from './player.reducer';
 
 const initialState: PlayerState = {
@@ -42,6 +43,7 @@ export const playerSlice = createSlice({
     setShuffle,
     setRepeat,
     setNextTrack,
+    setCurrentTime,
   },
 });
 
