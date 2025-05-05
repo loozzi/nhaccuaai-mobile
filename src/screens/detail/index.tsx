@@ -31,6 +31,8 @@ import PlaylistInfoComp from './PlaylistInfoComp';
 import AlbumInfoComp from './AlbumInfoComp';
 import ArtistInfoComp from './ArtistInfoComp';
 import useTheme from '../../hook/useTheme';
+import {useAppDispatch} from '../../app/hook';
+import {playerActions} from '../../hook/player/player.slice';
 
 type DetailScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -44,6 +46,7 @@ export default function DetailScreen() {
   const route = useRoute<DetailScreenRouteProp>();
   const {id, permalink, type} = route.params;
   const navigation = useNavigation<NavigationProps>();
+  const dispatch = useAppDispatch();
 
   const [data, setData] = useState<Album | Artist | Playlist | undefined>(
     undefined,
@@ -55,6 +58,20 @@ export default function DetailScreen() {
     navigation.goBack();
   };
 
+  const handlePlay = (item: PreviewModel) => {
+    if (item.type === 'track') {
+      dispatch(playerActions.playTrack(item));
+    } else if (item.type === 'album') {
+      navigation.push(routes.detail, {
+        id: item.id,
+        type: 'album',
+        permalink: item.permalink,
+      });
+    } else if (item.type === 'playlist') {
+      // TODO: Handle play playlist
+    }
+  };
+
   const handleShare = () => {};
 
   // TODO: Handle type = single;
@@ -62,7 +79,7 @@ export default function DetailScreen() {
     console.log('Fetching data for type:', type);
     if (type === 'track') {
       trackService.getTrackByPermalink(permalink ?? '').then(res => {
-        albumService.getAlbum(res.album_id ?? 0).then(album_res => {
+        albumService.getAlbum(res.album?.id ?? 0).then(album_res => {
           setData(album_res);
         });
       });
@@ -110,9 +127,10 @@ export default function DetailScreen() {
               title={t.tracks}
               size="small"
               showRemove={type === 'playlist' ? true : false}
+              onPress={handlePlay}
             />
           </View>
-          <View style={{paddingBottom: 120}} />
+          <View style={{paddingBottom: 192}} />
         </ScrollView>
       )}
     </View>

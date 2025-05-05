@@ -55,8 +55,10 @@ export default function StackPlayer(props: StackPlayerProps) {
           />
         </View>
         <View style={styles.center}>
-          <Text style={styles.name}>{player.currentTrack?.name}</Text>
-          <Text style={styles.artist}>
+          <Text style={styles.name} numberOfLines={1}>
+            {player.currentTrack?.name}
+          </Text>
+          <Text style={styles.artist} numberOfLines={1}>
             {player.currentTrack?.artists.map(e => e.name).join(' - ')}
           </Text>
         </View>
@@ -93,13 +95,13 @@ const styles = StyleSheet.create({
     height: 56,
     backgroundColor: 'gray',
     marginHorizontal: 8,
-    borderRadius: 4,
+    borderRadius: 6,
     padding: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: 8,
+    gap: 10,
     overflow: 'hidden',
-    opacity: 0.9,
+    opacity: 0.96,
   },
   left: {},
   progress: {
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
   img: {
     width: 40,
     height: 40,
-    borderRadius: 8,
+    borderRadius: 4,
   },
   center: {
     flex: 1,

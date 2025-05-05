@@ -145,7 +145,7 @@ export default function SearchScreen() {
             <Text style={styles.clearAllText}>{t.clearSearch}</Text>
           </TouchableOpacity>
         )}
-        {histories.length === 0 && (
+        {histories.length === 0 && search === '' && (
           <Text style={styles.empty}>{t.recentsSearchEmpty}</Text>
         )}
         {search !== '' && data.length < metaPagination.total && (
@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
   },
   empty: {
     alignSelf: 'center',
+    color: '#333',
   },
   seeMoreContainer: {},
   seeMoreBtn: {

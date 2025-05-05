@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     position: 'relative',
+    color: '#000',
   },
   input: {
     paddingHorizontal: 16,
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: 48,
     fontSize: 16,
+    color: '#000',
   },
   icon: {
     position: 'absolute',
