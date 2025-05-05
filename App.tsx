@@ -4,13 +4,14 @@ import React, {useEffect} from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import {Provider as ReduxProvider} from 'react-redux';
-import {store} from './src/app/store';
+import {persistor, store} from './src/app/store';
 import StackPlayer from './src/components/layout/stack-player';
 import {RootStackParamList} from './src/configs/navigation.route';
 import {LanguageProvider} from './src/contexts/languageContext';
 import {ThemeProvider} from './src/contexts/themeContext';
 import AuthNavigator from './src/navigation/auth';
 import {setupTrackPlayer} from './src/services/trackPlayer.service';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,23 +24,25 @@ export default function App() {
 
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider>
-        <LanguageProvider>
-          <NavigationContainer>
-            <View
-              style={{
-                flex: 1,
-                marginTop: StatusBar.currentHeight,
-                paddingTop: 0,
-              }}>
-              {/* TODO: Sửa style của status bar theo theme */}
-              <StatusBar barStyle="dark-content" />
-              <AuthNavigator Stack={Stack} />
-              <StackPlayer style={styles.stackPlayer} />
-            </View>
-          </NavigationContainer>
-        </LanguageProvider>
-      </ThemeProvider>
+      <PersistGate persistor={persistor} loading={null}>
+        <ThemeProvider>
+          <LanguageProvider>
+            <NavigationContainer>
+              <View
+                style={{
+                  flex: 1,
+                  marginTop: StatusBar.currentHeight,
+                  paddingTop: 0,
+                }}>
+                {/* TODO: Sửa style của status bar theo theme */}
+                <StatusBar barStyle="dark-content" />
+                <AuthNavigator Stack={Stack} />
+                <StackPlayer style={styles.stackPlayer} />
+              </View>
+            </NavigationContainer>
+          </LanguageProvider>
+        </ThemeProvider>
+      </PersistGate>
     </ReduxProvider>
   );
 }
